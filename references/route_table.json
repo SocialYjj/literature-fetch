@@ -1,0 +1,260 @@
+{
+ "10.1109": {
+  "name": "IEEE",
+  "mode": "headless",
+  "hl_ok": 1,
+  "hl_fail": 0,
+  "hd_ok": 0
+ },
+ "10.1007": {
+  "name": "Springer",
+  "mode": "headless",
+  "hl_ok": 0,
+  "hl_fail": 0,
+  "hd_ok": 0
+ },
+ "10.1038": {
+  "name": "Nature",
+  "mode": "headless",
+  "hl_ok": 1,
+  "hl_fail": 0,
+  "hd_ok": 0
+ },
+ "10.1088": {
+  "name": "IOP",
+  "mode": "headless",
+  "hl_ok": 1,
+  "hl_fail": 1,
+  "hd_ok": 0,
+  "challenge": "hCaptcha(风控触发型:无头/无痕/频繁访问时弹,平时可直下)"
+ },
+ "10.1145": {
+  "name": "ACM",
+  "mode": "headed",
+  "hl_ok": 0,
+  "hl_fail": 1,
+  "hd_ok": 1
+ },
+ "10.48550": {
+  "name": "arXiv",
+  "mode": "headless",
+  "hl_ok": 0,
+  "hl_fail": 0,
+  "hd_ok": 0
+ },
+ "10.24295": {
+  "name": "CPSS-TPEA",
+  "mode": "headless",
+  "hl_ok": 0,
+  "hl_fail": 0,
+  "hd_ok": 0
+ },
+ "10.35833": {
+  "name": "MPCE",
+  "mode": "headless",
+  "hl_ok": 0,
+  "hl_fail": 0,
+  "hd_ok": 0
+ },
+ "10.17775": {
+  "name": "CSEE-JPES",
+  "mode": "headless",
+  "hl_ok": 0,
+  "hl_fail": 0,
+  "hd_ok": 0
+ },
+ "10.1016": {
+  "name": "Elsevier",
+  "mode": "headed",
+  "hl_ok": 0,
+  "hl_fail": 0,
+  "hd_ok": 1,
+  "challenge": "Cloudflare(整页请稍候硬循环,无框可点;扩展/手点均无解,需换网络或时段)"
+ },
+ "10.1002": {
+  "name": "Wiley",
+  "mode": "headed",
+  "hl_ok": 0,
+  "hl_fail": 0,
+  "hd_ok": 1
+ },
+ "10.1049": {
+  "name": "IET",
+  "mode": "headed",
+  "hl_ok": 0,
+  "hl_fail": 0,
+  "hd_ok": 0
+ },
+ "10.1021": {
+  "name": "ACS",
+  "mode": "headed",
+  "hl_ok": 0,
+  "hl_fail": 0,
+  "hd_ok": 1
+ },
+ "10.3390": {
+  "name": "MDPI",
+  "mode": "headed",
+  "hl_ok": 0,
+  "hl_fail": 0,
+  "hd_ok": 2
+ },
+ "10.1063": {
+  "name": "AIP",
+  "mode": "headed",
+  "hl_ok": 0,
+  "hl_fail": 1,
+  "hd_ok": 0,
+  "challenge": "Cloudflare"
+ },
+ "10.1039": {
+  "name": "RSC",
+  "mode": "headed",
+  "hl_ok": 0,
+  "hl_fail": 1,
+  "hd_ok": 0,
+  "challenge": "Cloudflare"
+ },
+ "10.1103": {
+  "name": "APS",
+  "mode": "headed",
+  "hl_ok": 0,
+  "hl_fail": 1,
+  "hd_ok": 0,
+  "challenge": "Cloudflare"
+ },
+ "10.1061": {
+  "name": "ASCE",
+  "mode": "headed",
+  "hl_ok": 0,
+  "hl_fail": 1,
+  "hd_ok": 0,
+  "challenge": "Cloudflare"
+ },
+ "10.1115": {
+  "name": "ASME",
+  "mode": "headed",
+  "hl_ok": 0,
+  "hl_fail": 1,
+  "hd_ok": 0,
+  "challenge": "Cloudflare"
+ },
+ "10.1128": {
+  "name": "ASM",
+  "mode": "headed",
+  "hl_ok": 0,
+  "hl_fail": 1,
+  "hd_ok": 0,
+  "challenge": "Cloudflare"
+ },
+ "10.1090": {
+  "name": "AMS",
+  "mode": "headless",
+  "hl_ok": 2,
+  "hl_fail": 1,
+  "hd_ok": 0,
+  "note": "PDF在www.ams.org子域,urllib服务端直取(页内fetch被CORS挡);已在grab_via_doi特判"
+ },
+ "10.1287": {
+  "name": "INFORMS",
+  "mode": "headed",
+  "hl_ok": 0,
+  "hl_fail": 1,
+  "hd_ok": 0,
+  "challenge": "Cloudflare"
+ },
+ "10.1108": {
+  "name": "Emerald",
+  "mode": "headless",
+  "hl_ok": 1,
+  "hl_fail": 2,
+  "hd_ok": 0,
+  "note": "研究刊无头可下(insight/content/doi/{doi}/full/pdf);Case Studies产品需单独购买"
+ },
+ "10.1364": {
+  "name": "OPTICA",
+  "mode": "headed",
+  "hl_ok": 0,
+  "hl_fail": 1,
+  "hd_ok": 0,
+  "challenge": "文本验证码(输入框手打字母如mmdon,非CF/hCaptcha,必须真人)"
+ },
+ "10.1073": {
+  "name": "PNAS",
+  "mode": "headed",
+  "hl_ok": 0,
+  "hl_fail": 1,
+  "hd_ok": 0,
+  "challenge": "Cloudflare"
+ },
+ "10.4271": {
+  "name": "SAE",
+  "mode": "headed",
+  "hl_ok": 0,
+  "hl_fail": 1,
+  "hd_ok": 0,
+  "note": "saemobilus是JS应用,PDF藏JS后;校订仅SAE电子书,技术论文可能无全文权限"
+ },
+ "10.1126": {
+  "name": "Science",
+  "mode": "headed",
+  "hl_ok": 0,
+  "hl_fail": 1,
+  "hd_ok": 0,
+  "challenge": "Cloudflare"
+ },
+ "10.1117": {
+  "name": "SPIE",
+  "mode": "headed",
+  "hl_ok": 0,
+  "hl_fail": 1,
+  "hd_ok": 0
+ },
+ "10.1080": {
+  "name": "T-F",
+  "mode": "headed",
+  "hl_ok": 0,
+  "hl_fail": 1,
+  "hd_ok": 0,
+  "challenge": "Cloudflare(实测有CF验证)",
+  "note": "保留;本校订阅部分(科技期刊专辑库,理工科可下);人文社科刊不在订阅内会显示Content unavailable"
+ },
+ "10.1177": {
+  "name": "SAGE",
+  "mode": "headed",
+  "hl_ok": 0,
+  "hl_fail": 1,
+  "hd_ok": 1,
+  "note": "国内落sage.cnpereading.com代理平台的在线阅读器,需有头点进viewer取PDF"
+ },
+ "10.1371": {
+  "name": "PLOS",
+  "mode": "headless",
+  "hl_ok": 2,
+  "hl_fail": 0,
+  "hd_ok": 0
+ },
+ "10.1111": {
+  "name": "Wiley",
+  "mode": "headed",
+  "hl_ok": 0,
+  "hl_fail": 4,
+  "hd_ok": 0,
+  "challenge": "Cloudflare"
+ },
+ "10.3389": {
+  "name": "Frontiers",
+  "mode": "headless",
+  "hl_ok": 1,
+  "hl_fail": 0,
+  "hd_ok": 0
+ },
+ "10.1155": {
+  "name": "Hindawi",
+  "mode": "headed",
+  "hl_ok": 0,
+  "hl_fail": 1,
+  "hd_ok": 0,
+  "challenge": "Cloudflare"
+ }
+}

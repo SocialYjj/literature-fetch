@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# 运行时产物（工作目录里生成，不该进仓库）
+manifest.json
+topic_results.json
+_raw/
+_dl_tmp/
+_cfprofile/
+literature-cfprofile/
+参考文献/
+图片/
+config.json
+
+# 系统
+.DS_Store
+Thumbs.db
