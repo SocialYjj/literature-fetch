@@ -8,7 +8,7 @@ except Exception:
 
 # ---------- 配置 ----------
 DEFAULTS = {
-    "raw_dir": "_raw",                 # 批量管线下载落盘：_raw/<序号>.pdf
+    "raw_dir": "_raw",                 # 批量流程下载落盘：_raw/<序号>.pdf
     "pdf_dir": "参考文献",              # 留档成品目录
     "manifest": "manifest.json",
     "mailto": "research@example.com",  # 进 OpenAlex/CrossRef 礼貌池，换成真实邮箱更好

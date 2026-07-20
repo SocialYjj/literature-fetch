@@ -58,9 +58,9 @@ description: >-
 - `--keep`：复制到 `参考文献\题目.pdf` 留档。
 
 ### ③ 批量下载留档 —— 给了题目清单
-阶段 0→5 管线（下节），成品在 `参考文献\题目.pdf`。
+阶段 0→5 流程（下节），成品在 `参考文献\题目.pdf`。
 
-## 批量管线（scripts/ 按序跑；出版社细节见 references/publishers.md）
+## 批量流程（scripts/ 按序跑；出版社细节见 references/publishers.md）
 
 工作目录里运行；`manifest.json` 记录状态可断点续跑；可选 `config.json`：`{"mailto": "你的真实邮箱", "pdf_dir": "参考文献"}`。
 

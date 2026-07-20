@@ -10,12 +10,41 @@
 | **② 单篇速查** | 给 DOI 或题目 → 下到临时缓存供 AI 直接读 PDF 讲内容，`--keep` 才正式留档 |
 | **③ 批量下载** | 题目清单 xlsx/csv → 逐篇查 DOI、正版下载 → `参考文献/题目.pdf` |
 
-## 快速开始
+## 安装
+
+依赖两者通用：
 
 ```bash
 pip install openpyxl playwright drissionpage
 playwright install chromium          # 或让 DrissionPage 复用系统 Chrome
+```
 
+### Claude Code
+
+克隆进全局 skills 目录，即被自动发现：
+
+```bash
+git clone https://github.com/SocialYjj/literature-fetch.git ~/.claude/skills/literature-fetch
+```
+
+之后说「下载一批论文 / 按题目找 PDF / 找找关于 X 的论文」或 `/literature-fetch` 即可触发。
+
+### Codex CLI
+
+Codex 支持全局/项目级 skills，克隆进对应目录：
+
+```bash
+# 全局（所有项目可用）
+git clone https://github.com/SocialYjj/literature-fetch.git ~/.codex/skills/literature-fetch
+# 或项目级
+git clone https://github.com/SocialYjj/literature-fetch.git .codex/skills/literature-fetch
+```
+
+本 skill 本质是「`SKILL.md` 说明 + `scripts/` 纯 Python 脚本」，与具体 Agent 无关；若你的 Agent 没有 skills 目录约定，克隆到任意位置、让它读 `SKILL.md` 按流程调用脚本即可。
+
+## 快速开始
+
+```bash
 # 主题检索（零下载）
 python scripts/search_topic.py "quantum computing power system" --n 15 --from 2020
 
@@ -23,7 +52,7 @@ python scripts/search_topic.py "quantum computing power system" --n 15 --from 20
 python scripts/fetch_one.py 10.1109/TII.2023.3241234          # 下到临时缓存供阅读
 python scripts/fetch_one.py "论文完整题目" --keep              # 正式留档到 参考文献/
 
-# 批量管线（在一个工作目录里，含题目清单 xlsx）
+# 批量流程（在一个工作目录里，含题目清单 xlsx）
 python scripts/00_import_list.py 清单.xlsx      # → manifest.json
 python scripts/01_resolve_doi.py                # 查 DOI + OA 直链
 python scripts/02_download_institutional.py     # 无头下载(校园网直连)
@@ -37,7 +66,7 @@ python scripts/05_collect.py                    # 整理成 参考文献/题目.
 - **自适应路由**（`references/route_table.json`）：按 DOI 前缀记每家出版社走无头还是有头，**随运行结果自学习**，拷到新电脑经验带着走。已内置 34 家实测分类。
 - **无头优先**：IEEE/Springer/Nature/AMS/Emerald… 机构 IP 直下，快、不打扰。
 - **有头兜底**：Cloudflare 反爬社（Elsevier/Wiley/ACS…）用真实 Chrome + `assets/turnstilePatch` 扩展：温和 CF 零点击自动过，激进 CF（ScienceDirect）由用户真人点一次；`cf_clearance` 存 `_cfprofile`，同域名后续免验证。
-- **验证类型**：CF Turnstile（扩展多能自动过）> 文本验证码（OPTICA）> hCaptcha（IOP，最严）> reCAPTCHA（仅登录入口，管线碰不到）——后三种交用户手动。
+- **验证类型**：CF Turnstile（扩展多能自动过）> 文本验证码（OPTICA）> hCaptcha（IOP，最严）> reCAPTCHA（仅登录入口，流程碰不到）——后三种交用户手动。
 
 详见 `SKILL.md`（完整流程与决策逻辑）和 `references/publishers.md`（各出版社路由表 + 实测普查）。
 

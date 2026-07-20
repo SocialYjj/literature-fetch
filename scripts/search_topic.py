@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """工具·主题/关键词检索（调研第1层）：OpenAlex 相关度搜索，国内直连免代理、零下载。
-输出候选清单（题目/年份/期刊/被引/DOI/OA/摘要）到屏幕 + topic_results.json，供挑选后用 fetch_one.py 或批量管线获取。
+输出候选清单（题目/年份/期刊/被引/DOI/OA/摘要）到屏幕 + topic_results.json，供挑选后用 fetch_one.py 或批量流程获取。
 用法: python search_topic.py "quantum computing power system" [--n 15] [--from 2020] [--oa] [--sort cited]
      （关键词建议用英文；宽泛主题可换几组措辞多跑几次）"""
 import sys, os, json, urllib.parse
@@ -44,7 +44,7 @@ def main():
         if rec['abstract']: print(f"    摘要: {rec['abstract'][:280]}…")
         print()
     json.dump(out, open("topic_results.json", "w", encoding="utf-8"), ensure_ascii=False, indent=1)
-    print(f"共 {len(out)} 条 -> topic_results.json（挑中的可用 fetch_one.py <DOI> 获取，或写入 manifest 走批量管线）")
+    print(f"共 {len(out)} 条 -> topic_results.json（挑中的可用 fetch_one.py <DOI> 获取，或写入 manifest 走批量流程）")
 
 if __name__ == '__main__':
     main()
