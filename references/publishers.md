@@ -73,4 +73,5 @@ Windows 路径含空格/中文无碍；跑前清理残留 chrome 进程与 `_cfp
 - **样本未取到 PDF 多为订购范围问题**（非下载方法问题）：Emerald 样本是 purchase-only 案例研究（标题带🛒，需单独购买）；T&F 校订**仅"科技期刊专辑库"**，人文社科刊（如 Ming Studies）显示 "Content unavailable 此内容在某高校内不可用"——理工科 T&F 正常可下；SPIE/SAE 学校只订电子书。
 - **首屏 reCAPTCHA 拦截：零家**——文章页反爬 CF 一统天下；reCAPTCHA 只出现在登录表单/图书馆代理入口（EBSCO/ProQuest/校外VPN），校园网 IP 走 DOI 直达不会碰到
 - **验证类型总览（按严格度）**：① CF Turnstile（最常见，扩展多能自动过）② 文本验证码（OPTICA，手输）③ hCaptcha（IOP 风控触发，最严，手点）④ reCAPTCHA（仅登录入口，流程内碰不到）
+- **预印本平台**：arXiv（10.48550）无头直下；**Authorea（10.22541，Wiley 旗下）有 Cloudflare → 有头，扩展可过**（实测 2.1MB 成功）。SSRN（10.2139）等同类平台按未知社走"先无头后有头"自适应。
 - **检索/平台型库（无 DOI 直达全文，不适用本流程）**：Web of Science、Scopus、EI Compendex、Inspec、JCR、InCites、ESI、SciFinder、MathSciNet、EDS、EBSCO、ProQuest、PQDT、DDS、NSTL、Total Materia 等——这些是"查目录/查指标"，找到目标后仍回到出版社/DOI 渠道下全文

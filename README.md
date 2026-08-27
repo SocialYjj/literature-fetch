@@ -16,7 +16,7 @@
 
 ```bash
 pip install openpyxl playwright drissionpage
-playwright install chromium          # 或让 DrissionPage 复用系统 Chrome
+playwright install chromium          # 无头下载必需；有头下载走系统 Chrome
 ```
 
 ### Claude Code

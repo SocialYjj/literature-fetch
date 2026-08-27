@@ -256,5 +256,13 @@
   "hl_fail": 1,
   "hd_ok": 0,
   "challenge": "Cloudflare"
+ },
+ "10.22541": {
+  "name": "Authorea(Wiley预印本)",
+  "mode": "headed",
+  "hl_ok": 0,
+  "hl_fail": 1,
+  "hd_ok": 1,
+  "challenge": "Cloudflare(有头实测可过)"
  }
 }

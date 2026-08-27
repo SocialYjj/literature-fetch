@@ -99,6 +99,7 @@ description: >-
 `_raw/<序号>.pdf` → `参考文献\题目.pdf`（非法字符全角化、超长截断；重名题目加序号后缀防覆盖），打印未获取/跳过清单。
 
 ## 常见坑速查
+- **无头全线报 `BrowserType.launch: Executable doesn't exist`**：Playwright 的 Chromium 被清理/没装 → `python -m playwright install chromium` 重装（约 110MB）。⚠️ 症状容易误判成"没权限/出版社拦截"，先排除这个。
 - **各家 API 全 429**（OpenAlex/SemanticScholar/谷歌）：低并发+退避+mailto；被封等十几分钟或换 CrossRef/arXiv。
 - **超热门/同名标题错配**：OpenAlex 可能给同名克隆记录（已按被引量决胜 + OA 白名单兜底）；下载完抽查 PDF 是否对题，错的重查。
 - **装了 IDM 等下载器的电脑**：IDM 的浏览器接管是**系统级**的，连脚本启动的独立配置 Chrome 的下载也会被截走（文件进 IDM 目录，脚本等不到误判失败）。skill 已优先用**页内 fetch** 绕开下载子系统（IDM 截不走）；若锚点兜底仍被 IDM 抢，临时退出 IDM 或在其设置里取消对 Chrome 的接管。
