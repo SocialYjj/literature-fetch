@@ -120,7 +120,6 @@ def inv_abstract(inv, maxlen=1500):
 
 # ---------- 下载核心（page 参数为 Playwright Page，由调用方创建/关闭） ----------
 CF_HOSTS = ('sciencedirect', 'elsevier', 'onlinelibrary.wiley', 'pubs.acs.org', 'ietresearch')
-CF_DOI = ('10.1016', '10.1002', '10.1021', '10.1049')
 # 允许 urllib 直下的正版 OA 站白名单；其余（含来路不明的镜像）一律走 doi.org 出版社页
 OA_HOSTS = ('arxiv.org', 'ncbi.nlm.nih.gov', 'europepmc.org', 'mdpi.com', 'frontiersin.org',
             'hindawi.com', 'plos.org', 'springeropen.com', 'biomedcentral.com', 'file.cpss.org.cn')
@@ -370,23 +369,31 @@ def add_turnstile_patch(co, doi=None):
         pass
     return False
 
+def _page_title(page):
+    """兼容取标题：DrissionPage 的 title 是属性，Playwright 的是方法。"""
+    t = getattr(page, 'title', '')
+    if callable(t):
+        try: t = t()
+        except Exception: t = ''
+    return t or ''
+
 def _cf_state(page):
-    """判断当前页拦截状态：ok(已放行) / turnstile(CF挑战,扩展会自动点) / hcaptcha(需真人) / recaptcha(需真人)。"""
-    t = (getattr(page, 'title', '') or '')
+    """判断当前页拦截状态：ok(已放行) / turnstile(CF挑战) / hcaptcha(需真人) / recaptcha(需真人)。"""
+    t = _page_title(page)
     tl = t.lower()
     h = ''
-    try: h = (page.html or '')[:200000].lower()
+    try: h = (page.html or '')[:200000]
     except Exception: pass
-    if 'hcaptcha' in h or '真实访客' in (page.html or '')[:200000] or 'inconvenience' in tl or 'apologize' in tl:
+    hl = h.lower()
+    if 'hcaptcha' in hl or '真实访客' in h or 'inconvenience' in tl or 'apologize' in tl:
         return 'hcaptcha'
-    if 'g-recaptcha' in h or 'recaptcha/api' in h:
+    if 'g-recaptcha' in hl or 'recaptcha/api' in hl:
         return 'recaptcha'
+    # 只认 CF 挑战页的确切特征；不用裸 'turnstile' 关键词（正文含该词的论文会被误判为拦截）
     blocked = ('just a moment' in tl or '请稍候' in t or 'attention required' in tl
                or 'moment' in tl or len(t.strip()) == 0)
-    if blocked or 'cf-turnstile' in h or 'challenge-platform' in h or '__cf_chl' in h or 'turnstile' in h:
-        # 有 hCaptcha 特征优先判 hcaptcha（上面已排除），到这里就是 CF Turnstile
-        if blocked or 'turnstile' in h or 'challenge-platform' in h:
-            return 'turnstile'
+    if blocked or 'cf-turnstile' in hl or 'challenge-platform' in hl or '__cf_chl' in hl:
+        return 'turnstile'
     return 'ok'
 
 def pass_cf_auto(page, auto_secs=25):
@@ -401,19 +408,29 @@ def pass_cf_auto(page, auto_secs=25):
 
 def cleared_title(page):
     """标题法判断当前页是否已过拦截（无 Just a moment / 请稍候 / 道歉页 / robot）。"""
-    t = getattr(page, 'title', '') or ''
+    t = _page_title(page)
     return (all(x not in t for x in ('请稍候', 'Just a moment', 'Attention Required', 'moment',
                                      'apologize', 'inconvenience')) and 'robot' not in t.lower())
+
+_CF_GIVEUP = set()   # 本次运行中人工验证已超时的域名：同域名后续快速跳过，不再逐篇空等
 
 def ensure_access(page, tag='', manual_secs=180):
     """【统一第一步：确保过验证，带人工兜底】进出版社文章页后调用。
     ① 先让 turnstilePatch 扩展自动过 CF Turnstile；成功即返回 True（顺手关 Cookie 横幅）。
     ② 自动没过 → 明确提示验证类型 + 请用户在弹出窗口手动过；轮询等待，过了继续。
-    ③ manual_secs 内仍没过（多为 CF 整页死循环/无框可点，或用户不在场）→ 返回 False，调用方跳过。
+    ③ manual_secs 内仍没过 → 返回 False，并把该域名记入本次运行的放弃名单：
+       同域名后续论文直接快速跳过（避免无人值守时每篇都空等 3 分钟）。
     返回 True=可继续下载，False=没过（如实标记未获取，别硬闯）。"""
+    host = ''
+    try: host = urllib.parse.urlparse(page.url).netloc.lower()
+    except Exception: pass
     st = pass_cf_auto(page, auto_secs=25)
     if st == 'ok':
+        _CF_GIVEUP.discard(host)      # 本轮该域名已能过，解除放弃标记
         dismiss_consent(page); return True
+    if host and host in _CF_GIVEUP:   # 该域名本轮已确认过不去 → 不再空等
+        print(f"    [{host}] 本轮已确认验证过不去，快速跳过（换网络/稍后重跑该批）。", flush=True)
+        return False
     kind = {'hcaptcha': 'hCaptcha（最严，必须真人）',
             'recaptcha': 'reCAPTCHA（必须真人）',
             'need_user_turnstile': 'Cloudflare（扩展没自动过）'}.get(st, st)
@@ -424,9 +441,11 @@ def ensure_access(page, tag='', manual_secs=180):
         time.sleep(2)
         if cleared_title(page):
             print("    验证已过，继续。", flush=True)
+            _CF_GIVEUP.discard(host)
             dismiss_consent(page); return True
+    if host: _CF_GIVEUP.add(host)
     print(f"    {prefix}仍未通过。若是 CF 整页'请稍候'死循环 → 换网络/稍后再试；"
-          f"或复用已过验证的配置目录（cf_clearance）。本篇先跳过。", flush=True)
+          f"或复用已过验证的配置目录（cf_clearance）。该域名本轮后续论文将快速跳过。", flush=True)
     return False
 
 # ---------- 表头/题目列自动探测 ----------

@@ -15,7 +15,7 @@ import sys, os, re, time, tempfile, shutil, urllib.parse
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from lib import (CFG, fetch_json, sanitize, clean_query, pick_best, inv_abstract,
                  oa_direct, grab_via_doi, route_mode, record_route, UA, is_pdf,
-                 dp_fetch_pdf, same_host, dismiss_consent, add_turnstile_patch, ensure_access)
+                 dp_fetch_pdf, same_host, add_turnstile_patch, ensure_access)
 sys.stdout.reconfigure(encoding='utf-8')
 
 CACHE = os.path.join(tempfile.gettempdir(), "literature-cache")
@@ -90,7 +90,6 @@ def headed_grab(doi):
         # 第一步：确保过验证（扩展自动过CF → 失败提示转人工 → 死循环则本篇跳过）
         if not ensure_access(page, tag=doi.split('/')[0], manual_secs=180):
             return None
-        dismiss_consent(page)   # 自动关掉 Cookie 同意横幅（合规弹窗，非人机验证）
         reg = doi.split('/')[0]
         if reg == '10.1016':
             # SD 的 pdfft 是 HTML 中转页：必须真实点击/导航才会跳到真 PDF（fetch/带download属性的锚点只会拿到 HTML）

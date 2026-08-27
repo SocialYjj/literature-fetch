@@ -8,7 +8,7 @@ import sys, os, time, shutil, random, urllib.parse
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from lib import (CFG, load_manifest, have, is_pdf, load_routes, save_routes, route_mode,
                  record_route, dp_fetch_pdf, same_host, dismiss_consent, add_turnstile_patch,
-                 ensure_access, cleared_title, use_turnstile)
+                 ensure_access, use_turnstile)
 sys.stdout.reconfigure(encoding='utf-8')
 from DrissionPage import ChromiumPage, ChromiumOptions
 
