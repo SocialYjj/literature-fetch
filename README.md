@@ -63,7 +63,7 @@ python scripts/05_collect.py                    # 整理成 参考文献/题目.
 
 ## 工作原理
 
-- **自适应路由**（`references/route_table.json`）：按 DOI 前缀记每家出版社走无头还是有头，**随运行结果自学习**，拷到新电脑经验带着走。已内置 **59 家**实测分类（IEEE/Elsevier/Springer/Wiley/Nature/ACS/RSC/AIP/APS/Cambridge/Oxford/SIAM/BMJ/JAMA… 及 arXiv/bioRxiv/SSRN/Research Square 等预印本平台）。
+- **自适应路由**（`references/route_table.json`）：按 DOI 前缀记每家出版社走无头还是有头，**随运行结果自学习**，拷到新电脑经验带着走。已内置 **58 家**实测分类（IEEE/Elsevier/Springer/Wiley/Nature/ACS/RSC/AIP/APS/Cambridge/Oxford/SIAM/BMJ/JAMA… 及 arXiv/bioRxiv/Research Square/Authorea 等预印本平台）。
 - **无头优先**：IEEE/Springer/Nature/AMS/Emerald… 机构 IP 直下，快、不打扰。
 - **有头兜底**：Cloudflare 反爬社（Elsevier/Wiley/ACS…）用真实 Chrome + `assets/turnstilePatch` 扩展：温和 CF 零点击自动过，激进 CF（ScienceDirect）由用户真人点一次；`cf_clearance` 存 `_cfprofile`，同域名后续免验证。
 - **验证类型**：CF Turnstile（最常见，扩展多能自动过）> 文本验证码（OPTICA）> reCAPTCHA+PerimeterX（ECS）> hCaptcha（IOP，最严）——后三种交用户手动。

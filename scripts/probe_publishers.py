@@ -21,7 +21,7 @@ GROUPS = {
  '4':  [('10.1017', 'Cambridge'), ('10.1093', 'Oxford'), ('10.1515', 'DeGruyter'),
         ('10.1142', 'WorldScientific'), ('10.3233', 'IOSPress'), ('10.1504', 'Inderscience'),
         ('10.1137', 'SIAM'), ('10.1149', 'ECS电化学')],
- '5':  [('10.2139', 'SSRN'), ('10.21203', 'ResearchSquare'), ('10.20944', 'Preprints.org'),
+ '5':  [('10.21203', 'ResearchSquare'), ('10.20944', 'Preprints.org'),
         ('10.5194', 'Copernicus'), ('10.7554', 'eLife'), ('10.7717', 'PeerJ'),
         ('10.1101', 'bioRxiv/medRxiv'), ('10.2196', 'JMIR')],
  '6':  [('10.1146', 'AnnualReviews'), ('10.1098', 'RoyalSociety'), ('10.1136', 'BMJ'),

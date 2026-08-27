@@ -74,8 +74,10 @@ Windows 路径含空格/中文无碍；跑前清理残留 chrome 进程与 `_cfp
 - **首屏 reCAPTCHA：极少但存在**——文章页反爬 CF 占绝对多数；**例外：ECS 电化学学会（10.1149）用 reCAPTCHA + PerimeterX**（跳 `validate.perfdrive.com`），扩展无效必须真人。此外 reCAPTCHA 多出现在登录表单/图书馆代理入口（EBSCO/ProQuest/校外VPN），校园网 IP 走 DOI 直达一般碰不到
 - **验证类型总览（按严格度）**：① CF Turnstile（最常见，扩展多能自动过）② 文本验证码（OPTICA，手输）③ reCAPTCHA+PerimeterX（ECS，必须真人）④ hCaptcha（IOP 风控触发，最严，手点）⑤ WAF 直接 Access Denied（Preprints.org）
 - **国内代理平台落地**：SAGE、IOS Press 在国内会落到 `sage.cnpereading.com` 的在线阅读器，需有头点进 viewer 取 PDF
+- **预印本平台**：arXiv（10.48550）无头直下；**Authorea（10.22541，Wiley 旗下）有 Cloudflare → 有头，扩展可过**（实测 2.1MB 成功）；bioRxiv/medRxiv（10.1101）、Research Square（10.21203）、Preprints.org（10.20944）见第七节。
+- **检索/平台型库（无 DOI 直达全文，不适用本流程）**：Web of Science、Scopus、EI Compendex、Inspec、JCR、InCites、ESI、SciFinder、MathSciNet、EDS、EBSCO、ProQuest、PQDT、DDS、NSTL、Total Materia 等——这些是"查目录/查指标"，找到目标后仍回到出版社/DOI 渠道下全文
 
-## 七、第二轮出版社扩充实测（2026-08，共 59 家）
+## 七、第二轮出版社扩充实测（2026-08，共 58 家）
 
 **新增无头可下**：Cambridge（10.1017）、De Gruyter（10.1515，落 degruyterbrill.com）、Copernicus/EGU（10.5194，OA）
 
@@ -88,8 +90,6 @@ Windows 路径含空格/中文无碍；跑前清理残留 chrome 进程与 `_cfp
 
 **新增"页面可开但 PDF 在 JS 后"→ 有头**：IOS Press（10.3233，落国内 cnpereading 代理）、Research Square（10.21203）、eLife（10.7554）、Trans Tech/scientific.net（10.4028）、IEICE（10.1587，落 J-Stage）
 
-**SSRN（10.2139）待定**：实测 doi.org 跳转直接连不上（国内直连不通），需代理或去 papers.ssrn.com 手动取。
+**SSRN（10.2139）已移出路由表**：实测 doi.org 跳转与直连 papers.ssrn.com 均 `ERR_CONNECTION_TIMED_OUT`（国内不可达，需代理）。若你有代理环境，开代理后按未知社走"先无头后有头"自适应即可。
 
 **踩坑提醒**：普查取样本 DOI 时要校验前缀真属于该社——Annual Reviews 首次抽到的是其科普杂志 Knowable（非正刊），换成含 `annurev` 的正刊 DOI 才测出真实的 CF 拦截。
-- **预印本平台**：arXiv（10.48550）无头直下；**Authorea（10.22541，Wiley 旗下）有 Cloudflare → 有头，扩展可过**（实测 2.1MB 成功）。SSRN（10.2139）等同类平台按未知社走"先无头后有头"自适应。
-- **检索/平台型库（无 DOI 直达全文，不适用本流程）**：Web of Science、Scopus、EI Compendex、Inspec、JCR、InCites、ESI、SciFinder、MathSciNet、EDS、EBSCO、ProQuest、PQDT、DDS、NSTL、Total Materia 等——这些是"查目录/查指标"，找到目标后仍回到出版社/DOI 渠道下全文

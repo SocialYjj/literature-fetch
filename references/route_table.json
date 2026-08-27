@@ -450,13 +450,5 @@
   "hd_ok": 0,
   "challenge": "Cloudflare",
   "note": "落 pubs.aip.org,同AIP"
- },
- "10.2139": {
-  "name": "SSRN(Elsevier)",
-  "mode": "unknown",
-  "hl_ok": 0,
-  "hl_fail": 1,
-  "hd_ok": 0,
-  "note": "实测 doi.org 跳转失败(国内直连不通?);需代理或从 papers.ssrn.com 手动获取"
  }
 }
