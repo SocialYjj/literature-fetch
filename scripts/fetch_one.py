@@ -13,7 +13,7 @@
   python fetch_one.py "论文完整题目" [--keep] [--headed]"""
 import sys, os, re, time, tempfile, shutil, urllib.parse
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from lib import (CFG, fetch_json, sanitize, clean_query, pick_best, inv_abstract,
+from lib import (CFG, fetch_json, sanitize, simple_name, clean_query, pick_best, inv_abstract,
                  oa_direct, grab_via_doi, route_mode, record_route, UA, is_pdf,
                  dp_fetch_pdf, same_host, add_turnstile_patch, ensure_access)
 sys.stdout.reconfigure(encoding='utf-8')
@@ -194,7 +194,7 @@ def main():
         return
     if keep:
         outdir = CFG["pdf_dir"]; os.makedirs(outdir, exist_ok=True)
-        final = os.path.join(outdir, sanitize(title)[:120] + ".pdf")
+        final = os.path.join(outdir, simple_name({'excel_title': title, 'num': 1}, outdir=outdir) + ".pdf")
         shutil.copyfile(dst, final)
         print(f"已留档: {final}")
     else:

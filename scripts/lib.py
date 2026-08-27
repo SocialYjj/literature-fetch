@@ -50,10 +50,20 @@ def sanitize(s):
         else: out.append(ch)
     return ''.join(out).strip().rstrip('.')
 
-def simple_name(rec, maxlen=120):
-    """成品命名：题目（超长截断；空题目兜底用序号）。"""
+def simple_name(rec, maxlen=120, outdir=None, reserve=0):
+    """成品命名：题目（超长截断；空题目兜底用序号）。
+    传 outdir 时按 Windows 路径上限(260)反推可用长度，避免深目录下"文件名过长"报错；
+    reserve 预留给调用方将追加的后缀（如重名时的"(12)"）。"""
     t = str(rec.get('excel_title') or rec.get('title') or '').strip() or f"paper_{rec['num']}"
-    if len(t) > maxlen: t = t[:maxlen - 1] + '…'
+    lim = maxlen
+    if outdir:
+        try:
+            # 260 上限 - 目录绝对路径 - 路径分隔符 - ".pdf" - 后缀预留 - 安全余量
+            budget = 260 - len(os.path.abspath(outdir)) - 1 - 4 - reserve - 5
+            lim = max(20, min(maxlen, budget))
+        except Exception:
+            pass
+    if len(t) > lim: t = t[:lim - 1] + '…'
     return sanitize(t)
 
 # ---------- 标题相似度 ----------

@@ -10,7 +10,8 @@ sys.stdout.reconfigure(encoding='utf-8')
 def main():
     out = CFG["pdf_dir"]; os.makedirs(out, exist_ok=True)
     m = load_manifest(); ok = 0
-    names = {r['num']: simple_name(r) for r in m}
+    # 按目标目录路径长度反推可用文件名长度；预留 8 字符给重名后缀"(123)"
+    names = {r['num']: simple_name(r, outdir=out, reserve=8) for r in m}
     dup = Counter(names.values())
     for r in sorted(m, key=lambda x: x['num']):
         if not have(r['num']): continue
@@ -18,7 +19,12 @@ def main():
         if dup[name] > 1: name = f"{name}({r['num']})"   # 同名题目防覆盖
         dst = os.path.join(out, name + ".pdf")
         if not os.path.exists(dst):
-            shutil.copyfile(os.path.join(CFG["raw_dir"], f"{r['num']}.pdf"), dst)
+            try:
+                shutil.copyfile(os.path.join(CFG["raw_dir"], f"{r['num']}.pdf"), dst)
+            except OSError as e:   # 路径仍过长/非法等：退回用序号命名，保证不丢文件
+                dst = os.path.join(out, f"paper_{r['num']}.pdf")
+                shutil.copyfile(os.path.join(CFG["raw_dir"], f"{r['num']}.pdf"), dst)
+                print(f"  ({r['num']}) 题目命名失败({str(e)[:40]})，改用 {os.path.basename(dst)}")
         ok += 1
     miss = [r['num'] for r in m if not have(r['num']) and not r.get('skip')]
     skipped = [r['num'] for r in m if r.get('skip')]
