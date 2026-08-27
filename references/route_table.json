@@ -264,5 +264,199 @@
   "hl_fail": 1,
   "hd_ok": 1,
   "challenge": "Cloudflare(有头实测可过)"
+ },
+ "10.1017": {
+  "name": "Cambridge",
+  "mode": "headless",
+  "hl_ok": 1,
+  "hl_fail": 0,
+  "hd_ok": 0,
+  "note": "实测无头直下347KB"
+ },
+ "10.1093": {
+  "name": "Oxford(OUP)",
+  "mode": "headed",
+  "hl_ok": 0,
+  "hl_fail": 1,
+  "hd_ok": 0,
+  "challenge": "Cloudflare"
+ },
+ "10.1515": {
+  "name": "DeGruyter",
+  "mode": "headless",
+  "hl_ok": 1,
+  "hl_fail": 0,
+  "hd_ok": 0,
+  "note": "落 degruyterbrill.com,无头直下"
+ },
+ "10.1142": {
+  "name": "WorldScientific",
+  "mode": "headed",
+  "hl_ok": 0,
+  "hl_fail": 1,
+  "hd_ok": 0,
+  "challenge": "Cloudflare"
+ },
+ "10.3233": {
+  "name": "IOSPress",
+  "mode": "headed",
+  "hl_ok": 0,
+  "hl_fail": 1,
+  "hd_ok": 0,
+  "note": "国内落 sage.cnpereading.com 代理平台(同SAGE),需有头点进阅读器"
+ },
+ "10.1504": {
+  "name": "Inderscience",
+  "mode": "headed",
+  "hl_ok": 0,
+  "hl_fail": 1,
+  "hd_ok": 0,
+  "challenge": "Cloudflare"
+ },
+ "10.1137": {
+  "name": "SIAM",
+  "mode": "headed",
+  "hl_ok": 0,
+  "hl_fail": 1,
+  "hd_ok": 0,
+  "challenge": "Cloudflare"
+ },
+ "10.1149": {
+  "name": "ECS电化学",
+  "mode": "headed",
+  "hl_ok": 0,
+  "hl_fail": 1,
+  "hd_ok": 0,
+  "challenge": "reCAPTCHA+PerimeterX(validate.perfdrive.com)",
+  "note": "首个文章页用reCAPTCHA的出版社;扩展无效,必须真人"
+ },
+ "10.21203": {
+  "name": "ResearchSquare(预印本)",
+  "mode": "headed",
+  "hl_ok": 0,
+  "hl_fail": 1,
+  "hd_ok": 0,
+  "note": "页面可开,PDF入口在JS后,需有头"
+ },
+ "10.20944": {
+  "name": "Preprints.org",
+  "mode": "headed",
+  "hl_ok": 0,
+  "hl_fail": 1,
+  "hd_ok": 0,
+  "challenge": "Access Denied(WAF拦截)"
+ },
+ "10.5194": {
+  "name": "Copernicus(OA)",
+  "mode": "headless",
+  "hl_ok": 1,
+  "hl_fail": 0,
+  "hd_ok": 0,
+  "note": "EGU等OA刊,无头直下"
+ },
+ "10.7554": {
+  "name": "eLife(OA)",
+  "mode": "headed",
+  "hl_ok": 0,
+  "hl_fail": 1,
+  "hd_ok": 0,
+  "note": "页面可开,PDF入口在JS后,需有头"
+ },
+ "10.7717": {
+  "name": "PeerJ(OA)",
+  "mode": "headed",
+  "hl_ok": 0,
+  "hl_fail": 1,
+  "hd_ok": 0,
+  "challenge": "Cloudflare"
+ },
+ "10.1101": {
+  "name": "CSHL(bioRxiv/medRxiv)",
+  "mode": "headed",
+  "hl_ok": 0,
+  "hl_fail": 1,
+  "hd_ok": 0,
+  "challenge": "Cloudflare"
+ },
+ "10.2196": {
+  "name": "JMIR",
+  "mode": "headed",
+  "hl_ok": 0,
+  "hl_fail": 1,
+  "hd_ok": 0,
+  "challenge": "Human Verification页(类型待确认)"
+ },
+ "10.1146": {
+  "name": "AnnualReviews",
+  "mode": "headed",
+  "hl_ok": 0,
+  "hl_fail": 2,
+  "hd_ok": 0,
+  "challenge": "Cloudflare"
+ },
+ "10.1098": {
+  "name": "RoyalSociety",
+  "mode": "headed",
+  "hl_ok": 0,
+  "hl_fail": 1,
+  "hd_ok": 0,
+  "challenge": "Cloudflare"
+ },
+ "10.1136": {
+  "name": "BMJ",
+  "mode": "headed",
+  "hl_ok": 0,
+  "hl_fail": 1,
+  "hd_ok": 0,
+  "challenge": "Cloudflare"
+ },
+ "10.1001": {
+  "name": "JAMA(AMA)",
+  "mode": "headed",
+  "hl_ok": 0,
+  "hl_fail": 1,
+  "hd_ok": 0,
+  "challenge": "Cloudflare"
+ },
+ "10.1097": {
+  "name": "WoltersKluwer(LWW)",
+  "mode": "headed",
+  "hl_ok": 0,
+  "hl_fail": 1,
+  "hd_ok": 0,
+  "challenge": "Cloudflare"
+ },
+ "10.4028": {
+  "name": "TransTech材料",
+  "mode": "headed",
+  "hl_ok": 0,
+  "hl_fail": 1,
+  "hd_ok": 0,
+  "note": "scientific.net,PDF在JS后;可能仅订阅部分"
+ },
+ "10.1587": {
+  "name": "IEICE(J-Stage)",
+  "mode": "headed",
+  "hl_ok": 0,
+  "hl_fail": 1,
+  "hd_ok": 0,
+  "note": "落 jstage.jst.go.jp,PDF入口需有头"
+ },
+ "10.1121": {
+  "name": "ASA声学(托管AIP)",
+  "mode": "headed",
+  "hl_ok": 0,
+  "hl_fail": 1,
+  "hd_ok": 0,
+  "challenge": "Cloudflare",
+  "note": "落 pubs.aip.org,同AIP"
+ },
+ "10.2139": {
+  "name": "SSRN(Elsevier)",
+  "mode": "unknown",
+  "hl_ok": 0,
+  "hl_fail": 1,
+  "hd_ok": 0,
+  "note": "实测 doi.org 跳转失败(国内直连不通?);需代理或从 papers.ssrn.com 手动获取"
  }
 }
